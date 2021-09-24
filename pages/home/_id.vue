@@ -18,16 +18,44 @@
     {{ home.reviewValue }} <br />
     {{ home.guests }} guests, {{ home.bedrooms }} rooms, {{ home.beds }} beds,
     {{ home.bathrooms }} bath<br />
+
+    <div style="height: 800px; width: 800px" ref="map"></div>
   </div>
 </template>
 
 <script>
 import homes from "~/data/homes";
 export default {
-  head(){
-    return{
-      title: this.home.title
-    }
+  head() {
+    return {
+      title: this.home.title,
+      script: [
+        {
+          src: "https://maps.googleapis.com/maps/api/js?key=AIzaSyBL1pVkzgdRynrNNmx3qyNtmYU3lrRHDys&libraries=places",
+          hid: "map",
+          defer: true,
+        },
+      ],
+    };
+  },
+  //for 3rd party libraries use mounted() life cycle hook
+  mounted() {
+    const mapOptions = {
+      zoom: 18,
+      center: new window.google.maps.LatLng(
+        this.home._geoloc.lat,
+        this.home._geoloc.lng
+      ),
+      zoomControl: true,
+      fullscreenControl: false
+    };
+    const map = new window.google.maps.Map(this.$refs.map, mapOptions);
+    const position = new window.google.maps.LatLng(
+      this.home._geoloc.lat,
+      this.home._geoloc.lng
+    );
+    const marker = new window.google.maps.Marker({ position });
+    marker.setMap(map);
   },
   data() {
     return {
