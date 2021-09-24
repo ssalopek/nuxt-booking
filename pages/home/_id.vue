@@ -25,7 +25,6 @@
 </template>
 
 <script>
-import homes from "~/data/homes";
 if (process.client) {
   window.initMap = function () {
     console.log("test");
@@ -39,9 +38,10 @@ export default {
     };
   },
 
-  data() {
+  async asyncData({ params, $dataApi }) {
+    const home = await $dataApi.getHome(params.id);
     return {
-      home: {},
+      home,
     };
   },
 
@@ -51,12 +51,6 @@ export default {
       this.home._geoloc.lat,
       this.home._geoloc.lng
     );
-  },
-
-  //life cycle hook that is rendered when component is created
-  created() {
-    const home = homes.find((home) => home.objectID == this.$route.params.id);
-    this.home = home;
   },
 };
 </script>
