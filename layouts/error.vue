@@ -4,8 +4,6 @@
       style="
         margin-top: 16px;
         margin-bottom: 32px;
-        weight: 720px;
-        height: 360px;
       "
       src="https://www.argildx.com/wp-content/uploads/2017/06/Is-a-Misconfigured-%E2%80%9CPage-Not-Found%E2%80%9D-Jeopardizing-Your-Website.jpg"
     />

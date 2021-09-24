@@ -6,7 +6,7 @@ export default function(context, inject) {
     "X-Algolia-Application-Id": appId,
   };
 
-  inject("dataApi", { getHome });
+  inject("dataApi", { getHome, getReviewsByHomeId });
 
   async function getHome(homeId) {
     try {
@@ -14,6 +14,25 @@ export default function(context, inject) {
         await fetch(
           `https://${appId}-dsn.algolia.net/1/indexes/homes/${homeId}`,
           { headers }
+        )
+      );
+    } catch (error) {
+      return getErrorResponse(error);
+    }
+  }
+
+  async function getReviewsByHomeId(homeId) {
+    try {
+      return unWrap(
+        await fetch(
+          `https://${appId}-dsn.algolia.net/1/indexes/reviews/query`,
+          {
+            headers,
+            method: "POST",
+            body: JSON.stringify({
+              filters: `homeId:${homeId}`,
+            }),
+          }
         )
       );
     } catch (error) {
