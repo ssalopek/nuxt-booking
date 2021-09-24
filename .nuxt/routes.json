@@ -1,8 +1,9 @@
 [
   {
-    "name": "",
-    "path": "",
-    "component": "D:\\\\IT\\\\Vue\\\\nuxt-booking\\\\node_modules\\\\@nuxt\\\\vue-app\\\\template\\\\pages\\\\index.vue",
-    "_name": "_9ccea142"
+    "name": "index",
+    "path": "/",
+    "component": "D:\\\\IT\\\\Vue\\\\nuxt-booking\\\\pages\\\\index.vue",
+    "chunkName": "pages/index",
+    "_name": "_7709d824"
   }
 ]
