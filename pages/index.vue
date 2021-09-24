@@ -5,7 +5,9 @@
       :key="home.objectID"
       style="float: left; margin: 10px"
     >
-      <HomeCard :home="home" />
+      <nuxt-link :to="`/home/${home.objectID}`"
+        ><HomeCard :home="home"
+      /></nuxt-link>
     </div>
   </div>
 </template>
@@ -17,11 +19,13 @@ export default {
   head() {
     return {
       title: "Homepage",
-      meta: [{
+      meta: [
+        {
           name: "description",
           content: "This is a homepage",
-          hid: "description"
-      }]
+          hid: "description",
+        },
+      ],
     };
   },
   data() {
