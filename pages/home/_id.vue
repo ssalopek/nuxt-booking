@@ -18,6 +18,7 @@
     {{ home.reviewValue }} <br />
     {{ home.guests }} guests, {{ home.bedrooms }} rooms, {{ home.beds }} beds,
     {{ home.bathrooms }} bath<br />
+    {{ home.description }} <br />
 
     <div style="height: 800px; width: 800px" ref="map"></div>
   </div>
@@ -25,15 +26,26 @@
 
 <script>
 import homes from "~/data/homes";
+if (process.client) {
+  window.initMap = function () {
+    console.log("test");
+  };
+}
+
 export default {
   head() {
     return {
       title: this.home.title,
       script: [
         {
-          src: "https://maps.googleapis.com/maps/api/js?key=AIzaSyBL1pVkzgdRynrNNmx3qyNtmYU3lrRHDys&libraries=places",
+          src: "https://maps.googleapis.com/maps/api/js?key=AIzaSyBL1pVkzgdRynrNNmx3qyNtmYU3lrRHDys&libraries=places&callback=initMap",
           hid: "map",
           defer: true,
+          skip: process.client && window.mapLoaded,
+        },
+        {
+          innerHTML: "window.initMap = function(){window.mapLoaded = true}",
+          hid: "map-init",
         },
       ],
     };
@@ -47,7 +59,7 @@ export default {
         this.home._geoloc.lng
       ),
       zoomControl: true,
-      fullscreenControl: false
+      fullscreenControl: false,
     };
     const map = new window.google.maps.Map(this.$refs.map, mapOptions);
     const position = new window.google.maps.LatLng(
