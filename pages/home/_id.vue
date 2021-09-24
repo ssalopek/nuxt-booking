@@ -36,44 +36,23 @@ export default {
   head() {
     return {
       title: this.home.title,
-      script: [
-        {
-          src: "https://maps.googleapis.com/maps/api/js?key=AIzaSyBL1pVkzgdRynrNNmx3qyNtmYU3lrRHDys&libraries=places&callback=initMap",
-          hid: "map",
-          defer: true,
-          skip: process.client && window.mapLoaded,
-        },
-        {
-          innerHTML: "window.initMap = function(){window.mapLoaded = true}",
-          hid: "map-init",
-        },
-      ],
     };
   },
-  //for 3rd party libraries use mounted() life cycle hook
-  mounted() {
-    const mapOptions = {
-      zoom: 18,
-      center: new window.google.maps.LatLng(
-        this.home._geoloc.lat,
-        this.home._geoloc.lng
-      ),
-      zoomControl: true,
-      fullscreenControl: false,
-    };
-    const map = new window.google.maps.Map(this.$refs.map, mapOptions);
-    const position = new window.google.maps.LatLng(
-      this.home._geoloc.lat,
-      this.home._geoloc.lng
-    );
-    const marker = new window.google.maps.Marker({ position });
-    marker.setMap(map);
-  },
+
   data() {
     return {
       home: {},
     };
   },
+
+  mounted() {
+    this.$maps.showMap(
+      this.$refs.map,
+      this.home._geoloc.lat,
+      this.home._geoloc.lng
+    );
+  },
+
   //life cycle hook that is rendered when component is created
   created() {
     const home = homes.find((home) => home.objectID == this.$route.params.id);
