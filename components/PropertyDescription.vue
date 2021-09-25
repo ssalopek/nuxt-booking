@@ -11,7 +11,9 @@
             v-for="(feature, index) in home.features"
             :key="index"
             class="app-tag"
-          ></div>
+          >
+            {{ feature }}
+          </div>
         </div>
       </div>
     </div>

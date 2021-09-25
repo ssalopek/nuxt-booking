@@ -18,6 +18,7 @@ let store = {};
   store.modules = store.modules || {}
 
   resolveStoreModules(require('..\\store\\actions.js'), 'actions.js')
+  resolveStoreModules(require('..\\store\\auth.js'), 'auth.js')
   resolveStoreModules(require('..\\store\\getters.js'), 'getters.js')
   resolveStoreModules(require('..\\store\\mutations.js'), 'mutations.js')
   resolveStoreModules(require('..\\store\\state.js'), 'state.js')
@@ -28,6 +29,7 @@ let store = {};
     // Whenever any Vuex module is updated...
     module.hot.accept([
       '..\\store\\actions.js',
+      '..\\store\\auth.js',
       '..\\store\\getters.js',
       '..\\store\\mutations.js',
       '..\\store\\state.js',
