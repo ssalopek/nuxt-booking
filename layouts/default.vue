@@ -1,5 +1,6 @@
 <template>
   <div class="app">
+    <button @click="test">TEST</button>
     <header class="app-header">
       <div class="app-logo">
         <nuxt-link to="/"><img src="/images/logo.svg" /></nuxt-link>
@@ -46,6 +47,9 @@ export default {
           label: this.$refs.citySearch.value,
         },
       });
+    },
+    test() {
+      this.$store.dispatch("counterUp");
     },
   },
 };
