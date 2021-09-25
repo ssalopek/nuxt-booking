@@ -1,6 +1,7 @@
 {
     "name": "nuxt-booking",
     "dependencies": {
+        "js-cookie": "^3.0.1",
         "nuxt": "^2.15.7",
         "sass": "^1.42.1"
     },

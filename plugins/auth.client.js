@@ -1,6 +1,11 @@
-export default ({ $config }) => {
+import Cookie from "js-cookie";
+
+export default ({ $config }, inject) => {
   window.initAuth = init;
   addScript();
+  inject("auth", {
+    signOut,
+  });
 
   //https://developers.google.com/identity/sign-in/web/reference?hl=en
 
@@ -16,6 +21,7 @@ export default ({ $config }) => {
       const auth2 = await window.gapi.auth2.init({
         client_id: $config.auth.clientId,
       });
+      auth2.currentUser.listen(parseUser);
     });
     window.gapi.signin2.render("googleButton", {
       onsuccess: parseUser,
@@ -26,5 +32,21 @@ export default ({ $config }) => {
     const profile = user.getBasicProfile();
     console.log("Name: " + profile.getName());
     console.log("Image Url: " + profile.getImageUrl());
+
+    if (!user.isSignedIn()) {
+      Cookie.remove($config.auth.cookieName);
+      return;
+    }
+
+    const idToken = user.getAuthResponse().id_token;
+    Cookie.set($config.auth.cookieName, idToken, {
+      expires: 1 / 24,
+      sameSite: "Lax",
+    });
+  }
+
+  function signOut() {
+    const auth2 = window.gapi.auth2.getAuthInstance();
+    auth2.signOut();
   }
 };
