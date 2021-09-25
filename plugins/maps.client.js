@@ -56,20 +56,40 @@ export default function(context, inject) {
       center: new window.google.maps.LatLng(lat, lng),
       zoomControl: true,
       fullscreenControl: false,
+      //https://developers.google.com/maps/documentation/javascript/style-reference
+      styles: [
+        {
+          featureType: "poi.business",
+          elementType: "labels.icon",
+          stylers: [{ visibility: "off" }],
+        },
+      ],
     };
 
     const map = new window.google.maps.Map(canvas, mapOptions);
     if (!markers) {
       const position = new window.google.maps.LatLng(lat, lng);
-      const marker = new window.google.maps.Marker({ position });
+      const marker = new window.google.maps.Marker({
+        position,
+        clickable: false,
+      });
       marker.setMap(map);
       return;
     }
+
     //https://developers.google.com/maps/documentation/javascript/reference/coordinates#LatLngBounds
     const bounds = new window.google.maps.LatLngBounds();
     markers.forEach((home) => {
       const position = new window.google.maps.LatLng(home.lat, home.lng);
-      const marker = new window.google.maps.Marker({ position });
+      const marker = new window.google.maps.Marker({
+        position,
+        label: {
+          text: `$${home.pricePerNight}`,
+          className: `marker home-${home.id}`,
+        },
+        icon: "https://maps.gstatic.com/mapfiles/transparent.png",
+        clickable: false,
+      });
       marker.setMap(map);
       bounds.extend(position);
     });
