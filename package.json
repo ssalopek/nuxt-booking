@@ -1,12 +1,17 @@
 {
     "name": "nuxt-booking",
     "dependencies": {
-        "nuxt": "^2.15.7",
-        "tailwindcss": "^2.2.15"
+        "nuxt": "^2.15.7"
     },
     "scripts": {
         "dev": "nuxt",
         "build": "nuxt build",
         "start": "nuxt start"
+    },
+    "devDependencies": {
+        "@nuxtjs/tailwindcss": "^4.2.1",
+        "autoprefixer": "^10.3.5",
+        "postcss": "^8.3.8",
+        "tailwindcss": "^2.2.15"
     }
 }
