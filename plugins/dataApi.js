@@ -6,14 +6,14 @@ export default function(context, inject) {
     "X-Algolia-Application-Id": appId,
   };
 
-  inject("dataApi", { getHome, getReviewsByHomeId, getHomesByLocation });
+  inject("dataApi", { getHome, getReviewsByHomeId, getHomesByLocation, getUsersByHomeId });
 
-/*Async GET and POST functions that will fetch data from algolia URL 
+  /*Async GET and POST functions that will fetch data from algolia URL 
   and in body will return API parameters.
   https://www.algolia.com/doc/api-reference/api-parameters/ 
 */
 
-  //return Homes
+  //GET Homes
   async function getHome(homeId) {
     try {
       return unWrap(
@@ -27,7 +27,7 @@ export default function(context, inject) {
     }
   }
 
-  //return Reviews depending on ID of the house
+  //GET Reviews by ID
   async function getReviewsByHomeId(homeId) {
     try {
       return unWrap(
@@ -49,7 +49,25 @@ export default function(context, inject) {
     }
   }
 
-  //return Home depending on GeoLocation
+  //GET Users by ID
+  async function getUsersByHomeId(homeId) {
+    try {
+      return unWrap(
+        await fetch(`https://${appId}-dsn.algolia.net/1/indexes/users/query`, {
+          headers,
+          method: "POST",
+          body: JSON.stringify({
+            filters: `homeId:${homeId}`,
+            attributesToHighlight: [],
+          }),
+        })
+      );
+    } catch (error) {
+      return getErrorResponse(error);
+    }
+  }
+
+  //GET Homes by GeoLocation (lat, lng)
   async function getHomesByLocation(lat, lng, radiusInMeters = 1500) {
     try {
       return unWrap(
@@ -57,7 +75,7 @@ export default function(context, inject) {
           headers,
           method: "POST",
           body: JSON.stringify({
-            aroundLatLng: `${lat}, ${lng}`, 
+            aroundLatLng: `${lat}, ${lng}`,
             aroundRadius: radiusInMeters,
             hitsPerPage: 10,
             attributesToHighlight: [],
