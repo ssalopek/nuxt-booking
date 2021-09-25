@@ -5,6 +5,12 @@
   "HomeRow": {
     "description": "Auto imported from components/HomeRow.vue"
   },
+  "PropertyDetails": {
+    "description": "Auto imported from components/PropertyDetails.vue"
+  },
+  "PropertyGallery": {
+    "description": "Auto imported from components/PropertyGallery.vue"
+  },
   "ShortText": {
     "description": "Auto imported from components/ShortText.vue"
   }

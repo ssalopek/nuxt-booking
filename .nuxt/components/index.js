@@ -1,5 +1,7 @@
 export { default as HomeCard } from '../..\\components\\HomeCard.vue'
 export { default as HomeRow } from '../..\\components\\HomeRow.vue'
+export { default as PropertyDetails } from '../..\\components\\PropertyDetails.vue'
+export { default as PropertyGallery } from '../..\\components\\PropertyGallery.vue'
 export { default as ShortText } from '../..\\components\\ShortText.vue'
 
 // nuxt/nuxt.js#8607
