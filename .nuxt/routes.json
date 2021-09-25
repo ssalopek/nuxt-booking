@@ -3,18 +3,21 @@
     "name": "search",
     "path": "/search",
     "component": "D:\\\\IT\\\\Vue\\\\nuxt-booking\\\\pages\\\\search.vue",
-    "chunkName": "pages/search"
+    "chunkName": "pages/search",
+    "_name": "_15f005c6"
   },
   {
     "name": "home-id",
     "path": "/home/:id?",
     "component": "D:\\\\IT\\\\Vue\\\\nuxt-booking\\\\pages\\\\home\\\\_id.vue",
-    "chunkName": "pages/home/_id"
+    "chunkName": "pages/home/_id",
+    "_name": "_b929cae6"
   },
   {
     "name": "index",
     "path": "/",
     "component": "D:\\\\IT\\\\Vue\\\\nuxt-booking\\\\pages\\\\index.vue",
-    "chunkName": "pages/index"
+    "chunkName": "pages/index",
+    "_name": "_7709d824"
   }
 ]
