@@ -1,6 +1,5 @@
 <template>
   <div class="app">
-    <button @click="test">TEST</button>
     <header class="app-header">
       <div class="app-logo">
         <nuxt-link to="/"><img src="/images/logo.svg" /></nuxt-link>
@@ -21,7 +20,7 @@
       <div class="app-user-menu">
         <img src="/images/icons/house.svg" />
         <div class="name">Host</div>
-        <img src="/images/user.jpg" class="avatar" />
+        <div id="googleButton"></div>
       </div>
     </header>
     <nuxt />
@@ -47,9 +46,6 @@ export default {
           label: this.$refs.citySearch.value,
         },
       });
-    },
-    test() {
-      this.$store.dispatch("counterUp");
     },
   },
 };
